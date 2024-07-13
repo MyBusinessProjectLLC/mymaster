@@ -13,8 +13,11 @@
             <UserInformationSection @choosUserType="choosUserType" />
     
             <PricesSection :userType="userType" />
+
+            <FeedbackSection />
         </div>
     </div>
+    <FooterSection />
 </template>
 
 <script>
@@ -23,13 +26,17 @@ import WelcomeSection from '@/components/landing_page/WelcomeSection.vue';
 import AboutSection from '@/components/landing_page/AboutWebsiteSection.vue';
 import UserInformationSection from '@/components/landing_page/UserInformationSection.vue';
 import PricesSection from '@/components/landing_page/PricesSection.vue';
+import FeedbackSection from '@/components/landing_page/FeedbackSection.vue';
+import FooterSection from '@/components/landing_page/FooterSection.vue';
 export default{
     components:{
         HeaderBar,
         WelcomeSection,
         AboutSection,
         UserInformationSection,
-        PricesSection
+        PricesSection,
+        FeedbackSection,
+        FooterSection
     },
     data(){
         return{

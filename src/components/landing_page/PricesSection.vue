@@ -30,19 +30,21 @@
                     <div class="twoCardsBox"
                         v-for="(cartGroup, index) in carts[userType] || carts['employer']" :key="index">
                         <div class="cart" v-for="(cart, i) in cartGroup" :key="i" >
-                            <div class="cartPriceBox">
-                                <h3>{{ cart.price }}</h3>
-                                <p>/{{ cart.duration }}</p>
+                            <div class="cartInfoBox" >
+                                <div class="cartPriceBox">
+                                    <h3>{{ cart.price }}</h3>
+                                    <p>/{{ cart.duration }}</p>
+                                </div>
+        
+                                <p>{{ cart.info }}</p>
+        
+                                <ul>
+                                    <li v-for="(advantage, advantages_index) in cart.advantages" :key="advantages_index">
+                                        <img src="@/assets/landing/check.png" alt="Check icon">
+                                        {{ advantage }}
+                                    </li>
+                                </ul>
                             </div>
-    
-                            <p>{{ cart.info }}</p>
-    
-                            <ul>
-                                <li v-for="(advantage, advantages_index) in cart.advantages" :key="advantages_index">
-                                    <img src="@/assets/landing/check.png" alt="Check icon">
-                                    {{ advantage }}
-                                </li>
-                            </ul>
     
                             <button>Get started</button>
                         </div>
@@ -340,7 +342,7 @@ export default{
     justify-content: center;
     border-radius: 50%;
     z-index: 1;
-    top: 50%;
+    top: 45%;
     opacity: 1;
 }
 .cart:hover button{
@@ -357,6 +359,7 @@ export default{
     font-size: 18px;
     background-color: #293E89;
     color:#E7EAF3;
+    margin-top: auto;
 }
 li img{
     margin-right: 14px;
@@ -392,6 +395,11 @@ ul{
     gap: 14px;
     height: 67px;
     align-items: end;
+}
+.cartInfoBox{
+    display: grid;
+    gap: 25px;
+    height: max-content;
 }
 .cart{
     padding: 40px;
@@ -446,8 +454,5 @@ ul{
 }
 #adBox{
     display: flex;
-}
-section{
-    padding-bottom: 1000px;
 }
 </style>
