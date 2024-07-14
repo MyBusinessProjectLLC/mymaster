@@ -12,11 +12,12 @@
                 class="userTypeButtons">i am a worker</button>
         </div>
 
-        <div id="professionsBox">
+        <div id="professionsBox" v-if="selectedType" >
             <div id="professionsBoxHeader">
                 <div id="professionsSearchingBox">
                     <input type="text" placeholder="Write the name of the profession that interests you..." v-model="desired_profession" >
-                    <button>Search</button>
+                    <img v-if="desired_profession !== '' || professions_are_written" @click="clear_found" src="@/assets/landing/close.png" id="clear_search" alt="Clear professions search">
+                    <button @click="search()" >Search</button>
                 </div>
             </div>
 
@@ -28,7 +29,22 @@
             </div>
             
             <div id="professionsXscrollBox">
-                <div id="professionsMainBox" :style="{left: `-${selectedProfessions.length * 100}%`}" >
+                <div class="written_professions" v-if="professions_are_written" >
+                    <div class="professions">
+                        <div>
+                            <button v-for="(profession, index) in found_professions" :key="index"
+                            @click="selectProfession(profession)">
+                                <h5>{{ profession.name }}</h5>
+                            </button>
+
+                            <button class="showAnimation" v-if="found_professions.length === 0">
+                                <h5>No professions with this name were found</h5>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="professionsMainBox" :style="{left: `-${selectedProfessions.length * 100}%`, top: hiddenStandardGuidBox ? '100%' : '0%'}" >
                     <div class="professions">
                         <div>
                             <button v-for="(profession, index) in professions" :key="index"
@@ -62,6 +78,9 @@ export default{
             desired_profession: '',
             selectedProfessions: [],
             newSelectedProfession: null,
+            hiddenStandardGuidBox: false,
+            professions_are_written: false,
+            found_professions: [],
             professions: [
                 { 
                     id: 0, 
@@ -322,15 +341,13 @@ export default{
     },
     methods:{
         selectProfession(profession){
-            console.log(profession.subprofessions.length)
-            if(!this.newSelectedProfession && profession.subprofessions.length !== 0){
+            if(!this.newSelectedProfession && profession.subprofessions.length !== 0 && !this.selectedProfessions.includes(profession)){
                 this.selectedProfessions.push(profession);
                 this.newSelectedProfession = profession.id;
                 setTimeout(()=>{this.newSelectedProfession = null}, 500)
             }
         },
         removeElementFromSelectedProfessions(element){
-            console.log(element)
             if(element === 'last'){
                 // Remove last profession from selected_prfessions array
                 if(this.selectedProfessions.length !== 0){
@@ -352,17 +369,70 @@ export default{
             if(this.selectedProfessions.indexOf(profession) !== this.selectedProfessions.length - 1){
                 return '>'
             }
+        },
+        search(){
+            if(this.desired_profession !== ''){
+                this.hiddenStandardGuidBox = true;
+
+                // Reset found_professions array
+                this.found_professions = [];
+
+                // Loop through all professions to find matches
+                this.professions.forEach(category => {
+                    category.subprofessions.forEach(profession => {
+                        // Check if the profession name contains the desired_profession string
+                        if (profession.name.toLowerCase().includes(this.desired_profession.toLowerCase())) {
+                            // Add matching profession to found_professions array
+                            this.found_professions.push(profession);
+                        }
+                    });
+                });
+
+                this.professions_are_written = true;
+            }
+        },
+        clear_found(){
+            this.professions_are_written = false;
+            this.found_professions = [];
+            this.hiddenStandardGuidBox = false;
+            this.desired_profession = '';
         }
     }
 }
 </script>
 
 <style scoped>
+#clear_search{
+    position: absolute;
+    width: 15px;
+    cursor: pointer;
+    top: 28px;
+    right: 230px;
+}
+@keyframes foundShowAnimation {
+    0%{opacity: 0;}
+    100%{opacity: 1;}
+}
+.showAnimation{
+    animation: foundShowAnimation 500ms;
+}
+@keyframes written_professions_animation {
+    0%{top: -100%}
+    100%{top: 0%;}
+}
+.written_professions{
+    animation: written_professions_animation 500ms;
+    display: flex;
+    height: 427px;
+    transition: 500ms;
+    position: relative;
+}
 #professionsXscrollBox{
     width: 100%;
-    overflow-x: hidden;
+    overflow: hidden;
+    max-height: calc(100% - 158px);
 }
-#professionsMainBox{
+.professionsMainBox{
     position: relative;
     display: flex;
     height: 427px;
@@ -429,19 +499,13 @@ export default{
         scrollbar-color: rgba(70, 102, 211, 0.51) transparent;
     }
 }
-@keyframes showProfessions {
-    0%{height: 0;}
-    100%{height: 427px;}
-}
 .professions{
-    animation: showProfessions 500ms;
     height: 427px;
     overflow-y: scroll;
     overflow-x: hidden;
     transition: 500ms;
     display: flex;
-    min-width: 1032px;
-    max-width: 1032px;
+    min-width: 100%;
 }
 #professionsSearchingBox button{
     width: 198px;
@@ -467,9 +531,24 @@ export default{
     height: 54px;
     background: #F5F5F5;
     border-radius: 100px;
+    position: relative;
+}
+@keyframes professionsBoxShow {
+    0%{
+        width: 832px;
+        height: 400px;
+        opacity: 0;
+    }
+    100%{
+        width: 1032px;
+        height: 600px;
+        opacity: 1;
+    }
 }
 #professionsBox{
+    animation: professionsBoxShow 500ms;
     width: 1032px;
+    height: 600px;
     background: #FFFFFF;
     border: 1px solid #EBEBEB;
     border-radius: 35px;

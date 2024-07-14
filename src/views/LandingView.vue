@@ -51,7 +51,6 @@ export default{
     methods:{
         choosUserType(type){
             this.userType = type;
-            console.log(this.userType)
         }
     }
 }
