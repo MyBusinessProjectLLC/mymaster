@@ -1,6 +1,7 @@
 <template>
     <router-view v-if="userData" />
     <LandingPage />
+
 </template>
 
 <script>
@@ -48,9 +49,10 @@ body{
 
 /* Apply Poppins font to all text elements */
 body, p, h1, h2, h3, h4, h5, h6, ul, li, ol, a, span {
-  font-family: 'Poppins', sans-serif;
-  color: #222A4E;
-  margin: 0;
+    font-family: 'Poppins', sans-serif;
+    color: #222A4E;
+    margin: 0;
+    text-decoration: none;
 }
 
 /* Apply Poppins font and standard styles to buttons */
