@@ -44,34 +44,42 @@
                     </div>
                 </div>
                 
-                <div class="professionsMainBox" :style="{left: `-${selectedProfessions.length * 100}%`, top: hiddenStandardGuidBox ? '100%' : '0%'}" >
+                <div class="professionsMainBox" :style="{left: `-${selectedProfessionsArrayChecker().length * 100}%`, top: hiddenStandardGuidBox ? '100%' : '0%'}" >
                     <div class="professions">
                         <div>
                             <button v-for="(profession, index) in professions" :key="index"
                             @click="selectProfession(profession)">
-                                <h5>{{ profession.name }}</h5>
+                                <h5>{{ profession.name }} {{ profession.subprofessions.length !== 0 ? ' >': '' }}</h5>
                             </button>
                         </div>
                     </div>
     
                     <div class="professions" 
-                    v-for="(profession, prof_index) in selectedProfessions" :key="prof_index">
+                    v-for="(profession, prof_index) in selectedProfessionsArrayChecker()" :key="prof_index">
                         <div >
                             <button v-for="(subprofession, index) in profession.subprofessions" :key="index"
-                            @click="selectProfession(subprofession)">
-                                <h5>{{ subprofession.name }}</h5>
+                            @click="selectProfession(subprofession)"
+                            :style="{backgroundColor: setLastProfessionBackgrounColor(subprofession)}">
+                                <h5>{{ subprofession.name }} {{ subprofession.subprofessions.length !== 0 ? ' >': '' }}</h5>
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
+        <BestUsers v-if="selectedProfessions.length !== 0" 
+        :type="selectedType" 
+        :profession_id="selectedProfessions[selectedProfessions.length - 1].id" />
     </section>
+
 </template>
 
 <script>
+import BestUsers from '@/components/landing_page/BestUsers.vue'
 export default{
+    components:{
+        BestUsers
+    },
     data(){
         return{
             selectedType: null,
@@ -340,8 +348,31 @@ export default{
         }
     },
     methods:{
+        setLastProfessionBackgrounColor(profession){
+            // We check if the profession is the last one in the branch and has been selected, then add a background to it
+            if(this.selectedProfessions.includes(profession) && profession.subprofessions.length === 0){
+                return 'rgba(70, 102, 211, 0.06)';
+            }
+        },
+        selectedProfessionsArrayChecker(){
+            //A function to check whether the last profession has subprocesses; if not, it returns everything except this
+            let professions = [];
+            for (const profession of this.selectedProfessions){
+                if(profession.subprofessions.length !== 0){
+                    professions.push(profession);
+                }
+            }
+            return professions
+        },
         selectProfession(profession){
-            if(!this.newSelectedProfession && profession.subprofessions.length !== 0 && !this.selectedProfessions.includes(profession)){
+            if(!this.newSelectedProfession && !this.selectedProfessions.includes(profession)){
+                /*
+                If the selected profession does not have subprofessions and at the same time the last added profession also did not have subprofessions, 
+                delete it in order to avoid a bug with adding several professions without subprofessions
+                */
+                if(profession.subprofessions.length === 0 && this.selectedProfessions[this.selectedProfessions.length - 1].subprofessions.length === 0){
+                    this.selectedProfessions.splice(this.selectedProfessions.length - 1, 1);
+                }
                 this.selectedProfessions.push(profession);
                 this.newSelectedProfession = profession.id;
                 setTimeout(()=>{this.newSelectedProfession = null}, 500)
@@ -554,6 +585,7 @@ export default{
     border-radius: 35px;
     margin-top: 80px;
     padding-bottom: 29px;
+    margin: 0 auto;
 }
 .userTypeButtonsSelected{
     background-color: #293E89;
@@ -593,7 +625,6 @@ h2{
 }
 section{
     display: grid;
-    justify-content: center;
     padding: 50px 0;
     gap: 24px;
 }
