@@ -9,9 +9,9 @@
             <WelcomeSection />
     
             <AboutSection />
-    
+            
             <UserInformationSection @choosUserType="choosUserType" />
-    
+            
             <PricesSection :userType="userType" />
 
             <FeedbackSection />
@@ -76,5 +76,14 @@ export default{
     /* Vector 2 */
     left: 0;
     top: 490px;
+}
+
+@media screen and (max-width: 1000px){
+    #landing-main{
+        padding: 0 20px;
+    }
+    #pattern_2{
+        top: 370px;
+    }
 }
 </style>

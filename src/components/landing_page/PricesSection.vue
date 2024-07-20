@@ -1,7 +1,11 @@
 <template>
     <section>
         <div id="adBox">
-            <div id="ad">
+            <div class="ad">
+                <img src="@/assets/landing/alarm.png" alt="Ad's Alarm">
+                <p>Free for the first 100 registrants.</p>
+            </div>
+            <div class="ad">
                 <img src="@/assets/landing/alarm.png" alt="Ad's Alarm">
                 <p>Free for the first 100 registrants.</p>
             </div>
@@ -9,6 +13,9 @@
 
         <div style="position: relative" >
 
+            <!--
+            
+            
             <button id="arrowLeft"
                 v-if="leftArrowShow" class="arrows"
                 @click="cartPositionMinus"
@@ -21,46 +28,43 @@
                 :class="{'hiddenArrow': rightArrowHidden}">
                 <img src="@/assets/landing/arrow_right.png" alt="Arrow right">
             </button>
-
+-->
             <div id="pricesMainBox">
     
-                <div id="pricesBox"
-                    :style="{left: `calc(-${cartPosition * 100}% - ${cartPosition * 100}px - 50px)`}" >
+                <div id="pricesBox">
+                    <!--:style="{left: `calc(-${cartPosition * 100}% - ${cartPosition * 100}px - 50px)`}"-->
     
-                    <div class="twoCardsBox"
-                        v-for="(cartGroup, index) in carts[userType] || carts['employer']" :key="index">
-                        <div class="cart" v-for="(cart, i) in cartGroup" :key="i" >
-                            <div class="cartInfoBox" >
-                                <div class="cartPriceBox">
-                                    <h3>{{ cart.price }}</h3>
-                                    <p>/{{ cart.duration }}</p>
-                                </div>
-        
-                                <p>{{ cart.info }}</p>
-        
-                                <ul>
-                                    <li v-for="(advantage, advantages_index) in cart.advantages" :key="advantages_index">
-                                        <img src="@/assets/landing/check.png" alt="Check icon">
-                                        {{ advantage }}
-                                    </li>
-                                </ul>
+                    <div class="cart" v-for="(cart, i) in carts[userType] || carts['employer']" :key="i" >
+                        <div class="cartInfoBox" >
+                            <div class="cartPriceBox">
+                                <h3>{{ cart.price }}</h3>
+                                <p>/{{ cart.duration }}</p>
                             </div>
     
-                            <button>Get started</button>
+                            <p>{{ cart.info }}</p>
+    
+                            <ul>
+                                <li v-for="(advantage, advantages_index) in cart.advantages" :key="advantages_index">
+                                    <img src="@/assets/landing/check.png" alt="Check icon">
+                                    {{ advantage }}
+                                </li>
+                            </ul>
                         </div>
-    
-    
+
+                        <button>Get started</button>
                     </div>
     
                 </div>
 
+                <!--
+                
                 <div id="dotsBox">
                     <div
                         v-for="index in carts[userType].length || carts['employer'].length" :key="index"
                         :style="{width: index === cartPosition + 1 ? '30px' : '12px', backgroundColor: index === cartPosition + 1 ? '#293E89' : '#C4C4C4'}"
                         class="dot"
                         @click="selectCartPositionByDot(index)"></div>
-                </div>
+                </div>-->
             </div>
 
 
@@ -78,140 +82,88 @@ export default{
             cartPosition: 0,
             carts:{
                 employer:[
-                    [
-                        {
-                            price: '$10',
-                            duration: 'month',
-                            info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed ',
-                            advantages: [
-                                'Lorem ipsum dolor sit amet, consectetur',
-                                'Lorem ipsum dolor sit amet, consectetur',
-                                'Lorem ipsum dolor sit amet, consectetur'
-                            ]
-                        },
-                        {
-                            price: '$10',
-                            duration: 'month',
-                            info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed ',
-                            advantages: [
-                                'Lorem ipsum dolor sit amet, consectetur',
-                                'Lorem ipsum dolor sit amet, consectetur',
-                                'Lorem ipsum dolor sit amet, consectetur'
-                            ]
-                        }
-                    ],
-                    [
-                        {
-                            price: '$10',
-                            duration: 'month',
-                            info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed ',
-                            advantages: [
-                                'Lorem ipsum dolor sit amet, consectetur',
-                                'Lorem ipsum dolor sit amet, consectetur',
-                                'Lorem ipsum dolor sit amet, consectetur'
-                            ]
-                        },
-                        {
-                            price: '$10',
-                            duration: 'month',
-                            info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed ',
-                            advantages: [
-                                'Lorem ipsum dolor sit amet, consectetur',
-                                'Lorem ipsum dolor sit amet, consectetur',
-                                'Lorem ipsum dolor sit amet, consectetur'
-                            ]
-                        }
-                    ],
-                    [
-                        {
-                            price: '$10',
-                            duration: 'month',
-                            info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed ',
-                            advantages: [
-                                'Lorem ipsum dolor sit amet, consectetur',
-                                'Lorem ipsum dolor sit amet, consectetur',
-                                'Lorem ipsum dolor sit amet, consectetur'
-                            ]
-                        },
-                        {
-                            price: '$10',
-                            duration: 'month',
-                            info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed ',
-                            advantages: [
-                                'Lorem ipsum dolor sit amet, consectetur',
-                                'Lorem ipsum dolor sit amet, consectetur',
-                                'Lorem ipsum dolor sit amet, consectetur'
-                            ]
-                        }
-                    ],
+                    {
+                        price: '$10',
+                        duration: 'month',
+                        info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed ',
+                        advantages: [
+                            'Lorem ipsum dolor sit amet, consectetur',
+                            'Lorem ipsum dolor sit amet, consectetur',
+                            'Lorem ipsum dolor sit amet, consectetur'
+                        ]
+                    },
+                    {
+                        price: '$10',
+                        duration: 'month',
+                        info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed ',
+                        advantages: [
+                            'Lorem ipsum dolor sit amet, consectetur',
+                            'Lorem ipsum dolor sit amet, consectetur',
+                            'Lorem ipsum dolor sit amet, consectetur'
+                        ]
+                    },
+                    {
+                        price: '$10',
+                        duration: 'month',
+                        info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed ',
+                        advantages: [
+                            'Lorem ipsum dolor sit amet, consectetur',
+                            'Lorem ipsum dolor sit amet, consectetur',
+                            'Lorem ipsum dolor sit amet, consectetur'
+                        ]
+                    },
+                    {
+                        price: '$10',
+                        duration: 'month',
+                        info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed ',
+                        advantages: [
+                            'Lorem ipsum dolor sit amet, consectetur',
+                            'Lorem ipsum dolor sit amet, consectetur',
+                            'Lorem ipsum dolor sit amet, consectetur'
+                        ]
+                    },
                 ],
                 worker:[
-                [
-                        {
-                            price: '$12',
-                            duration: 'month',
-                            info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed ',
-                            advantages: [
-                                'Lorem ipsum dolor sit amet, consectetur',
-                                'Lorem ipsum dolor sit amet, consectetur',
-                                'Lorem ipsum dolor sit amet, consectetur'
-                            ]
-                        },
-                        {
-                            price: '$10',
-                            duration: 'month',
-                            info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed ',
-                            advantages: [
-                                'Lorem ipsum dolor sit amet, consectetur',
-                                'Lorem ipsum dolor sit amet, consectetur',
-                                'Lorem ipsum dolor sit amet, consectetur'
-                            ]
-                        }
-                    ],
-                    [
-                        {
-                            price: '$10',
-                            duration: 'month',
-                            info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed ',
-                            advantages: [
-                                'Lorem ipsum dolor sit amet, consectetur',
-                                'Lorem ipsum dolor sit amet, consectetur',
-                                'Lorem ipsum dolor sit amet, consectetur'
-                            ]
-                        },
-                        {
-                            price: '$10',
-                            duration: 'month',
-                            info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed ',
-                            advantages: [
-                                'Lorem ipsum dolor sit amet, consectetur',
-                                'Lorem ipsum dolor sit amet, consectetur',
-                                'Lorem ipsum dolor sit amet, consectetur'
-                            ]
-                        }
-                    ],
-                    [
-                        {
-                            price: '$10',
-                            duration: 'month',
-                            info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed ',
-                            advantages: [
-                                'Lorem ipsum dolor sit amet, consectetur',
-                                'Lorem ipsum dolor sit amet, consectetur',
-                                'Lorem ipsum dolor sit amet, consectetur'
-                            ]
-                        },
-                        {
-                            price: '$10',
-                            duration: 'month',
-                            info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed ',
-                            advantages: [
-                                'Lorem ipsum dolor sit amet, consectetur',
-                                'Lorem ipsum dolor sit amet, consectetur',
-                                'Lorem ipsum dolor sit amet, consectetur'
-                            ]
-                        }
-                    ],
+                    {
+                        price: '$10',
+                        duration: 'month',
+                        info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed ',
+                        advantages: [
+                            'Lorem ipsum dolor sit amet, consectetur',
+                            'Lorem ipsum dolor sit amet, consectetur',
+                            'Lorem ipsum dolor sit amet, consectetur'
+                        ]
+                    },
+                    {
+                        price: '$10',
+                        duration: 'month',
+                        info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed ',
+                        advantages: [
+                            'Lorem ipsum dolor sit amet, consectetur',
+                            'Lorem ipsum dolor sit amet, consectetur',
+                            'Lorem ipsum dolor sit amet, consectetur'
+                        ]
+                    },
+                    {
+                        price: '$10',
+                        duration: 'month',
+                        info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed ',
+                        advantages: [
+                            'Lorem ipsum dolor sit amet, consectetur',
+                            'Lorem ipsum dolor sit amet, consectetur',
+                            'Lorem ipsum dolor sit amet, consectetur'
+                        ]
+                    },
+                    {
+                        price: '$10',
+                        duration: 'month',
+                        info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed ',
+                        advantages: [
+                            'Lorem ipsum dolor sit amet, consectetur',
+                            'Lorem ipsum dolor sit amet, consectetur',
+                            'Lorem ipsum dolor sit amet, consectetur'
+                        ]
+                    },
                 ],
             },
             leftArrowShow: false,
@@ -381,13 +333,13 @@ ul{
 }
 .cartPriceBox h3{
     font-weight: 600;
-    font-size: 70px;
+    font-size: 50px;
     transition: 300ms;
-    height: 85px;
+    height: 62px;
 }
 .cartPriceBox p{
     font-weight: 500;
-    font-size: 20px;
+    font-size: 16px;
     transition: 300ms;
 }
 .cartPriceBox{
@@ -402,7 +354,7 @@ ul{
     height: max-content;
 }
 .cart{
-    padding: 40px;
+    padding: 10px 30px 30px 30px;
     transition: 500ms;
     border-radius: 20px;
     background-color: #E7EAF3;
@@ -422,7 +374,9 @@ ul{
     margin: 0 50px;
 }
 #pricesBox{
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
     position: relative;
     transition: 500ms;
 }
@@ -432,16 +386,16 @@ ul{
     overflow: hidden;
     position: relative;
 }
-#ad img{
+.ad img{
     position: absolute;
     left: -72px;
     top: -27px;
 }
-#ad p{
+.ad p{
     font-weight: 500;
     font-size: 17px;
 }
-#ad{
+.ad{
     width: 349px;
     height: 69px;
     background: #E7EAF3;
@@ -454,5 +408,43 @@ ul{
 }
 #adBox{
     display: flex;
+    flex-wrap: wrap;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+}
+
+@media screen and (max-width: 1240px){
+    #pricesBox{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media screen and (max-width: 1000px){
+    #pricesBox, #pricesMainBox{
+        max-width: 100%;
+    }
+}
+@media screen and (max-width: 700px){
+    #pricesBox{
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .cart{
+        max-width: 360px;
+        margin: 0 auto;
+    }
+    .ad{
+        width: 100%;
+        padding: 10px;
+        margin-left: 0;
+        justify-content: start;
+    }
+    .ad img{
+        position: unset;
+        width: 70px;
+    }
+}
+@media screen and (max-width: 500px){
+    .cart{
+        max-width: unset;
+    }
 }
 </style>

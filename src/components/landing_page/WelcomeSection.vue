@@ -15,13 +15,13 @@
 h1{
     font-style: normal;
     font-weight: 600;
-    font-size: 50px;
+    font-size: clamp(25px, 4vw, 50px);
     margin-bottom: 26px;
 }
 p{
     font-style: normal;
     font-weight: 400;
-    font-size: 20px;
+    font-size: clamp(15px, 2vw, 20px);
 }
 section{
     display: grid;
@@ -29,30 +29,14 @@ section{
     gap: 45px;
     align-items: center;
     align-content: center;
+    min-height: calc(100vh - 101px);
 }
-
-@media screen and (max-width: 1370px){
-    h1{
-        font-size: 40px;
-    }
-    p{
-        font-size: 16px;
-    }
-}
-@media screen and (max-width: 1200px){
-    img{
-        width: 400px;
-    }
+img{
+    width: clamp(350px, 40vw, 600px);
 }
 @media screen and (max-width: 1000px){
     img{
-        width: 340px;
-    }
-    h1{
-        font-size: 25px;
-    }
-    p{
-        font-size: 13px;
+        width: 0px;
     }
 }
 </style>

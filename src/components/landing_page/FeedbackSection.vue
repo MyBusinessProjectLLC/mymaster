@@ -128,4 +128,37 @@ section{
     position: relative;
     padding: 70px 0 110px 0;
 }
+@media screen and (max-width: 1250px) {
+    #rigthRectangle, #leftRectangle{
+        display: none;
+    }
+}
+@media screen and (max-width: 800px) {
+    #contactsMain{
+        width: 100%;
+    }
+    #contactsSection{
+        grid-template-columns: repeat(1, 1fr);
+    }
+    #contactsSection a{
+        width: 200px;
+        margin: auto;
+    }
+}
+@media screen and (max-width: 600px) {
+    #emailSection button{
+        width: unset;
+        padding: 0 10px;
+    }
+}
+@media screen and (max-width: 400px) {
+    #emailSection{
+        grid-template-columns: 1fr;
+    }
+    #emailSection button{
+        width: 173px;
+        margin: auto;
+        padding: unset;
+    }
+}
 </style>

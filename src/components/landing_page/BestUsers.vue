@@ -211,7 +211,6 @@ export default{
 .userCard{
     border-radius: 20px;
     background-color: white;
-    width: 352px;
     box-shadow: 34.85px 29.63px 48.34px rgba(70, 102, 211, 0.05);
     cursor: pointer;
     transition: 300ms;
@@ -294,5 +293,11 @@ h2{
     max-width: 100%;
     min-width: 100%;
     position: relative;
+}
+@media screen and (max-width: 400px){
+    .userAvatarBox{
+        width: 290px;
+        height: 204px;
+    }
 }
 </style>

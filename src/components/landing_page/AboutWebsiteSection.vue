@@ -15,51 +15,33 @@
 h2{
     font-style: normal;
     font-weight: 600;
-    font-size: 40px;
+    font-size: clamp(24px, 3vw, 40px);
     margin-bottom: 26px;
 }
 p{
     font-style: normal;
     font-weight: 400;
-    font-size: 20px;
+    font-size: clamp(15px, 2vw, 20px);
 }
 section{
     display: grid;
     grid-template-columns: 1fr auto;
-    gap: 155px;
+    gap: 45px;
     align-items: center;
     align-content: center;
+    position: relative;
+    z-index: 1;
+}
+img{
+    width: clamp(300px, 40vw, 500px);
 }
 
-@media screen and (max-width: 1370px){
-    h2{
-        font-size: 30px;
-    }
-    p{
-        font-size: 16px;
-    }
-    
-}
-@media screen and (max-width: 1200px){
-    img{
-        width: 340px;
-    }
-    section{
-        gap: 121px;
-    }
-}
 @media screen and (max-width: 1000px){
-    img{
-        width: 280px;
-    }
     section{
-        gap: 108px;
+        grid-template-columns: 1fr;
     }
-    h2{
-        font-size: 20px;
-    }
-    p{
-        font-size: 13px;
+    img{
+        margin: auto;
     }
 }
 </style>

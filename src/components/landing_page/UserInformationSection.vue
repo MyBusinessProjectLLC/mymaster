@@ -478,6 +478,7 @@ export default{
     margin: 0 3px;
     cursor: pointer;
     transition: 300ms;
+    white-space: nowrap;
 }
 #guideBox h3{
     opacity: 0.5;
@@ -492,7 +493,9 @@ export default{
     align-items: center;
     overflow-x: scroll;
     width: 100%;
-    overflow-y: hidden
+    overflow-y: hidden;
+    scrollbar-width: thin; 
+    scrollbar-color: rgba(0, 0, 0, 0.5) transparent; 
 }
 .professions button h5{
     font-weight: 500;
@@ -522,11 +525,21 @@ export default{
     border-radius: 100px;
 }
 
-.professions::-webkit-scrollbar-track {
+#guideBox::-webkit-scrollbar {
+    width: 15px;
+}
+
+#guideBox::-webkit-scrollbar-thumb {
+    height: 169px;
+    background: rgba(70, 102, 211, 0.51);
+    border-radius: 100px;
+}
+
+#guideBox::-webkit-scrollbar-track {
     background: transparent;
 }
 @-moz-document url-prefix() {
-    .professions {
+    .professions, #guideBox {
         scrollbar-color: rgba(70, 102, 211, 0.51) transparent;
     }
 }
@@ -566,19 +579,19 @@ export default{
 }
 @keyframes professionsBoxShow {
     0%{
-        width: 832px;
+        width: clamp(220px, 70vw, 832px);
         height: 400px;
         opacity: 0;
     }
     100%{
-        width: 1032px;
+        width: clamp(320px, 80vw, 1032px);
         height: 600px;
         opacity: 1;
     }
 }
 #professionsBox{
     animation: professionsBoxShow 500ms;
-    width: 1032px;
+    width: clamp(320px, 80vw, 1032px);
     height: 600px;
     background: #FFFFFF;
     border: 1px solid #EBEBEB;
@@ -634,9 +647,51 @@ section{
     }
     
 }
+@media screen and (max-width: 1250px){
+
+}
 @media screen and (max-width: 1000px){
     h2{
         font-size: 20px;
+    }
+}
+@media screen and (max-width: 800px){
+    #professionsSearchingBox button{
+        width: unset;
+        padding: 0 30px;
+    }
+    #professionsSearchingBox input{
+        width: calc(100% - 40px);
+    }
+    #clear_search{
+        display: none;
+    }
+}
+@media screen and (max-width: 600px){
+    #professionsBoxHeader{
+        padding: 10px;
+    }
+}
+@media screen and (max-width: 500px){
+    .userTypeButtons{
+        width: 150px;
+        font-size: 13px;
+    }
+}
+@media screen and (max-width: 400px) {
+    #professionsBox{
+        max-width: calc(100vw - 40px);
+        height: 568px;
+    }
+    .professions button{
+        padding: 0;
+        margin: 0 10px;
+        width: calc(100% - 20px);
+        font-size: 14px;
+        height: 65px;
+    }
+    #btnsBox{
+        display: grid;
     }
 }
 </style>

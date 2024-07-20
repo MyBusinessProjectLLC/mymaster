@@ -106,4 +106,20 @@ section{
     background-color: #293E89;
 
 }
+@media screen and (max-width: 1000px) {
+    #footerInformationBox{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media screen and (max-width: 800px) {
+    #footerInformationBox{
+        gap: 30px;
+        padding: 40px 20px;
+    }
+}
+@media screen and (max-width: 500px) {
+    #footerInformationBox{
+        grid-template-columns: 1fr;
+    }
+}
 </style>
