@@ -1,6 +1,6 @@
 <template>
-    <router-view v-if="userData" />
-    <LandingPage />
+    <router-view v-if="userData || pageName === 'authorization'" />
+    <LandingPage v-if="!userData && pageName !== 'authorization'" />
 
 </template>
 
@@ -14,18 +14,19 @@ export default{
     },
     data(){
         return{
-            userData: null
+            userData: null,
+            pageName: this.$route.name
         }
     },
     mounted(){
         this.get_user();
     },
     watch:{
-        'this.$route.path'(newPath, oldPath) {
-            // Checking URL loading
+        '$route.path': function(newPath, oldPath) {
             if (newPath !== oldPath) {
                 this.get_user();
             }
+            this.pageName = this.$route.name;
         }
     },
     methods:{

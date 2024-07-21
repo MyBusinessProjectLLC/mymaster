@@ -3,9 +3,10 @@
         <img src="@/assets/logo.png" id="logo" alt="Logotype">
 
         <div>
-            <button id="login">Log in</button>
+            <button id="login" @click="$router.push('/authorization/login')" >Log in</button>
             <button id="register" 
-                :style="{backgroundColor: color}" >Register</button>
+                :style="{backgroundColor: color}" 
+                @click="$router.push('/authorization/register')" >Register</button>
 
             <button id="language">
                 <svg viewBox="0 0 215 218" fill="none" xmlns="http://www.w3.org/2000/svg">

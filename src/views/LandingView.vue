@@ -55,6 +55,10 @@ export default{
     mounted(){
         // Set page title
         document.title = 'MyMaster | Welcome';
+
+        if(sessionStorage.getItem('userType')){
+            this.color = this.$store.state.colors[sessionStorage.getItem('userType')]
+        }
     },
     methods:{
         choosUserType(type){

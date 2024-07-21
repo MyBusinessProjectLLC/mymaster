@@ -4,13 +4,13 @@
         <p id="mainInfo" >Lorem ipsum dolor sit amet, consectetur adipiscing</p>
 
         <div id="btnsBox" >
-            <button @click="selectedType = 'employer'; $emit('choosUserType', selectedType); buttonIsActive.worker = false;"
+            <button @click="setUserType('employer')"
                 :class="{'userTypeButtonsSelected': selectedType === 'employer'}"
                 :style="{borderColor: color, backgroundColor: buttonIsActive.employer ? color : 'transparent'}"
                 @mouseenter="buttonIsActive.employer = true"
                 @mouseleave="deactivateButton('employer')"
                 class="userTypeButtons">I am an employer</button>
-            <button @click="selectedType = 'worker'; $emit('choosUserType', selectedType); buttonIsActive.employer = false;"
+            <button @click="setUserType('worker')"
                 :class="{'userTypeButtonsSelected': selectedType === 'worker'}"
                 :style="{borderColor: color, backgroundColor: buttonIsActive.worker ? color : 'transparent'}"
                 @mouseenter="buttonIsActive.worker = true"
@@ -361,6 +361,16 @@ export default{
         }
     },
     methods:{
+        setUserType(userType){
+            this.selectedType = userType; 
+            this.$emit('choosUserType', userType); 
+            sessionStorage.setItem('userType', userType);
+            if(userType === 'worker'){
+                this.buttonIsActive.employer = false;
+            }else{
+                this.buttonIsActive.worker = false;
+            }
+        },
         deactivateButton(type){
             if(this.selectedType === type){
                 this.buttonIsActive[type] = true;
