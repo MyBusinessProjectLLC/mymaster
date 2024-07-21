@@ -1,13 +1,35 @@
 <template>
     <section>
-        <img src="@/assets/landing/rectangle.png" id="leftRectangle" alt="Rectangle">
+        <svg id="leftRectangle" width="56" height="57" viewBox="0 0 56 57" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g filter="url(#filter0_d_3_638)">
+                <rect width="30.0057" height="30.1734" rx="7" transform="matrix(0.860263 -0.509851 0.491575 0.870835 7.72852 19.0107)" 
+                :fill="color"/>
+            </g>
+            <defs>
+                <filter id="filter0_d_3_638" x="0.253906" y="0.312012" width="55.5938" height="56.375" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                    <feOffset dy="4"/>
+                    <feGaussianBlur stdDeviation="5"/>
+                    <feComposite in2="hardAlpha" operator="out"/>
+                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_3_638"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_3_638" result="shape"/>
+                </filter>
+            </defs>
+        </svg>
+
 
         <div id="contactsMain">
             <h2>Send your email and we will contact you</h2>
 
             <div id="emailSection">
                 <input type="text" placeholder="Your email for feedback" >
-                <button>Send</button>
+                <button ref="sendButton"
+                    :style="{borderColor: color}"
+                    @mouseenter="$refs.sendButton.style.backgroundColor = color;"
+                    @mouseleave="$refs.sendButton.style.backgroundColor = 'transparent'"
+                    >Send</button>
             </div>
 
             <div id="contactsSection">
@@ -37,22 +59,46 @@
             </div>
         </div>
 
-        <img src="@/assets/landing/rectangle.png" id="rigthRectangle" alt="Rectangle">
+        <svg id="rigthRectangle" width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g filter="url(#filter0_d_3_572)">
+                <rect width="30.0057" height="30.1734" rx="7" transform="matrix(0.410917 -0.911673 0.902794 0.430073 8.6875 31.1128)" 
+                :fill="color"/>
+            </g>
+            <defs>
+                <filter id="filter0_d_3_572" x="0.9375" y="0.0917969" width="55.0684" height="55.6636" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                    <feOffset dy="4"/>
+                    <feGaussianBlur stdDeviation="5"/>
+                    <feComposite in2="hardAlpha" operator="out"/>
+                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_3_572"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_3_572" result="shape"/>
+                </filter>
+            </defs>
+        </svg>
+
     </section>
 </template>
+
+<script>
+export default{
+    props:{
+        color: String
+    }
+}
+</script>
 
 <style scoped>
 #leftRectangle{
     position: absolute;
     top: 80px;
     left: 5vw;
-    rotate: 30.65deg;
 }
 #rigthRectangle{
     position: absolute;
     bottom: 80px;
     right: 5vw;
-    rotate: 65.74deg;
 }
 #contactsSection a p span{
     font-weight: 800;

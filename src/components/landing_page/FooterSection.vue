@@ -1,5 +1,5 @@
 <template>
-    <section>
+    <section :style="{backgroundColor: color}" >
         <div id="footerInformationBox">
 
             <div class="footerInformation1">
@@ -42,6 +42,14 @@
         </div>
     </section>
 </template>
+
+<script>
+export default{
+    props:{
+        color: String
+    }
+}
+</script>
 
 <style scoped>
 .footerLastBox a{
@@ -101,10 +109,6 @@
     display: grid;
     grid-template-columns: repeat(4, auto);
     gap: 60px;
-}
-section{
-    background-color: #293E89;
-
 }
 @media screen and (max-width: 1000px) {
     #footerInformationBox{

@@ -34,7 +34,11 @@
                 <div id="pricesBox">
                     <!--:style="{left: `calc(-${cartPosition * 100}% - ${cartPosition * 100}px - 50px)`}"-->
     
-                    <div class="cart" v-for="(cart, i) in carts[userType] || carts['employer']" :key="i" >
+                    <div class="cart" v-for="(cart, i) in carts[userType] || carts['employer']" :key="i"
+                        ref="cart"
+                        @mouseenter="cartHoverHandler(i)"
+                        @mouseleave="cartHoverRemoveHandler(i)" >
+
                         <div class="cartInfoBox" >
                             <div class="cartPriceBox">
                                 <h3>{{ cart.price }}</h3>
@@ -51,7 +55,7 @@
                             </ul>
                         </div>
 
-                        <button>Get started</button>
+                        <button ref="cart_button" :style="{backgroundColor: color}" >Get started</button>
                     </div>
     
                 </div>
@@ -75,7 +79,8 @@
 <script>
 export default{
     props:{
-        userType: String
+        userType: String,
+        color: String
     },
     data(){
         return{
@@ -173,6 +178,14 @@ export default{
         }
     },
     methods:{
+        cartHoverHandler(i){
+            this.$refs.cart[i].style.backgroundColor = this.color;
+            this.$refs.cart_button[i].style.backgroundColor = 'white';
+        },
+        cartHoverRemoveHandler(i){
+            this.$refs.cart[i].style.backgroundColor = '#E7EAF3';
+            this.$refs.cart_button[i].style.backgroundColor = this.color;
+        },
         selectCartPositionByDot(pos){
             if(this.cartPosition !== pos - 1){
                 this.cartPosition = pos - 1;

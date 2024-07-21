@@ -22,10 +22,10 @@
             
             <PricesSection :color="color" :userType="userType" />
 
-            <FeedbackSection />
+            <FeedbackSection :color="color" />
         </div>
     </div>
-    <FooterSection />
+    <FooterSection :color="color" />
 </template>
 
 <script>
