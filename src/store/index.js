@@ -4,6 +4,11 @@ export default createStore({
     state: {
         userData: null, // Store user data here
         elementsColor: '#293E89', // Standard color for elements
+        colors: {
+            standard: '#123369',
+            employer: '#4B0084',
+            worker: '#35ABBF'
+        }
     },
     getters: {
         isLoggedIn(state) {

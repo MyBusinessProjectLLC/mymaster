@@ -4,11 +4,17 @@
         <p id="mainInfo" >Lorem ipsum dolor sit amet, consectetur adipiscing</p>
 
         <div id="btnsBox" >
-            <button @click="selectedType = 'employer'; $emit('choosUserType', selectedType)"
+            <button @click="selectedType = 'employer'; $emit('choosUserType', selectedType); buttonIsActive.worker = false;"
                 :class="{'userTypeButtonsSelected': selectedType === 'employer'}"
+                :style="{borderColor: color, backgroundColor: buttonIsActive.employer ? color : 'transparent'}"
+                @mouseenter="buttonIsActive.employer = true"
+                @mouseleave="deactivateButton('employer')"
                 class="userTypeButtons">I am an employer</button>
-            <button @click="selectedType = 'worker'; $emit('choosUserType', selectedType)"
+            <button @click="selectedType = 'worker'; $emit('choosUserType', selectedType); buttonIsActive.employer = false;"
                 :class="{'userTypeButtonsSelected': selectedType === 'worker'}"
+                :style="{borderColor: color, backgroundColor: buttonIsActive.worker ? color : 'transparent'}"
+                @mouseenter="buttonIsActive.worker = true"
+                @mouseleave="deactivateButton('worker')"
                 class="userTypeButtons">i am a worker</button>
         </div>
 
@@ -17,11 +23,11 @@
                 <div id="professionsSearchingBox">
                     <input type="text" placeholder="Write the name of the profession that interests you..." v-model="desired_profession" >
                     <img v-if="desired_profession !== '' || professions_are_written" @click="clear_found" src="@/assets/landing/close.png" id="clear_search" alt="Clear professions search">
-                    <button @click="search()" >Search</button>
+                    <button @click="search()" :style="{backgroundColor: color}" >Search</button>
                 </div>
             </div>
 
-            <div id="guideBox" >
+            <div id="guideBox" :style="{'scrollbar-color': `${color}90 transparent`}">
                 <h3  v-if="selectedProfessions.length !== 0"
                 @click="removeElementFromSelectedProfessions('last')">&lt;</h3>
                 <h5 v-for="(profession, index) in selectedProfessions" :key="index" 
@@ -30,7 +36,7 @@
             
             <div id="professionsXscrollBox">
                 <div class="written_professions" v-if="professions_are_written" >
-                    <div class="professions">
+                    <div class="professions" :style="{'scrollbar-color': `${color}90 transparent`}">
                         <div>
                             <button v-for="(profession, index) in found_professions" :key="index"
                             @click="selectProfession(profession)">
@@ -45,7 +51,7 @@
                 </div>
                 
                 <div class="professionsMainBox" :style="{left: `-${selectedProfessionsArrayChecker().length * 100}%`, top: hiddenStandardGuidBox ? '100%' : '0%'}" >
-                    <div class="professions">
+                    <div class="professions" :style="{'scrollbar-color': `${color}90 transparent`}">
                         <div>
                             <button v-for="(profession, index) in professions" :key="index"
                             @click="selectProfession(profession)">
@@ -54,7 +60,7 @@
                         </div>
                     </div>
     
-                    <div class="professions" 
+                    <div class="professions" :style="{'scrollbar-color': `${color}90 transparent`}" 
                     v-for="(profession, prof_index) in selectedProfessionsArrayChecker()" :key="prof_index">
                         <div >
                             <button v-for="(subprofession, index) in profession.subprofessions" :key="index"
@@ -80,8 +86,15 @@ export default{
     components:{
         BestUsers
     },
+    props:{
+        color: String
+    },
     data(){
         return{
+            buttonIsActive: {
+                worker: false,
+                employer: false
+            },
             selectedType: null,
             desired_profession: '',
             selectedProfessions: [],
@@ -348,6 +361,13 @@ export default{
         }
     },
     methods:{
+        deactivateButton(type){
+            if(this.selectedType === type){
+                this.buttonIsActive[type] = true;
+            }else{
+                this.buttonIsActive[type] = false;
+            }
+        },
         setLastProfessionBackgrounColor(profession){
             // We check if the profession is the last one in the branch and has been selected, then add a background to it
             if(this.selectedProfessions.includes(profession) && profession.subprofessions.length === 0){
@@ -515,34 +535,6 @@ export default{
 .professions div{
     width: 100%;
 }
-.professions::-webkit-scrollbar {
-    width: 15px;
-}
-
-.professions::-webkit-scrollbar-thumb {
-    height: 169px;
-    background: rgba(70, 102, 211, 0.51);
-    border-radius: 100px;
-}
-
-#guideBox::-webkit-scrollbar {
-    width: 15px;
-}
-
-#guideBox::-webkit-scrollbar-thumb {
-    height: 169px;
-    background: rgba(70, 102, 211, 0.51);
-    border-radius: 100px;
-}
-
-#guideBox::-webkit-scrollbar-track {
-    background: transparent;
-}
-@-moz-document url-prefix() {
-    .professions, #guideBox {
-        scrollbar-color: rgba(70, 102, 211, 0.51) transparent;
-    }
-}
 .professions{
     height: 427px;
     overflow-y: scroll;
@@ -559,6 +551,7 @@ export default{
     color: #ffffff;
     font-size: 17;
     font-weight: 600;
+    transition: 300ms;
 }
 #professionsSearchingBox input{
     padding: 0 20px;
@@ -610,12 +603,11 @@ export default{
     font-size: 16px;
     width: 216px;
     height: 59px;
-    border: 2px solid #293E89;
+    border: 2px solid;
     border-radius: 100px;
     transition: 300ms;
 }
 .userTypeButtons:hover{
-    background-color: #293E89;
     color: #f5f5f5;
 }
 #btnsBox{
