@@ -1,14 +1,13 @@
 <template>
     <div id="main">
-        <div id="blureBox" :style="{backgroundColor: $store.state.colors.standard + 'cc'}" ></div>
         <div id="box">
             <h2>Login</h2>
 
             <div class="inputBox">
-                <input type="text" name="login" placeholder="Username or e-mail" >
+                <input :style="{backgroundColor: color + '20'}" type="text" name="login" placeholder="Username or e-mail" >
             </div>
             <div class="inputBox">
-                <input :type="showPassword ? 'text' : 'password'" name="password" placeholder="Password">
+                <input :style="{backgroundColor: color + '20'}" :type="showPassword ? 'text' : 'password'" name="password" placeholder="Password">
                 
                 <svg @click="showPassword = true" v-if="!showPassword" class="eye" width="519" height="310" viewBox="0 0 519 310" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M232.319 307.975C195.331 303.399 165.276 294.455 134.552 278.882C118.503 270.747 105.209 262.951 94.9028 255.63C91.5501 253.248 87.2338 250.188 85.3111 248.83C62.6291 232.809 29.8181 200.555 9.54277 174.348C0.605958 162.797 0 161.551 0 154.716C0 146.998 0.687316 145.731 13.4751 129.873C33.0847 105.556 64.3647 75.3897 85.3111 60.594C87.2338 59.2359 91.5501 56.1761 94.9028 53.7945C123.319 33.6088 163.172 15.5025 196.086 7.82395C240.802 -2.60798 277.831 -2.60798 322.547 7.82395C355.461 15.5025 395.313 33.6088 423.73 53.7945C427.082 56.1761 431.399 59.2359 433.321 60.594C456.003 76.6157 488.814 108.869 509.09 135.076C518.027 146.627 518.633 147.873 518.633 154.708C518.633 162.426 517.945 163.693 505.157 179.551C485.548 203.868 454.268 234.034 433.321 248.83C431.399 250.188 427.082 253.248 423.73 255.63C395.313 275.815 355.461 293.922 322.547 301.6C290.939 308.974 258.767 311.247 232.319 307.975ZM288.51 261.993C304.145 257.974 323.817 246.841 335.528 235.382C343.629 227.457 352.386 216.66 352.386 214.599C352.386 213.703 352.931 212.969 353.597 212.969C354.774 212.969 361.906 198.091 364.834 189.524C370.258 173.656 371.877 146.644 368.241 132.688C364.352 117.761 362.024 110.641 360.78 109.872C360.071 109.434 359.49 108.08 359.49 106.864C359.49 102.924 346.29 84.6635 336.574 75.1611C325.699 64.5264 308.917 54.0489 295.55 49.5486C274.746 42.545 243.911 42.5462 223.083 49.5516C192.509 59.8346 163.791 88.471 154.358 118.081C148.279 137.162 146.59 162.144 150.391 176.736C154.28 191.663 156.609 198.783 157.853 199.552C158.562 199.99 159.142 201.344 159.142 202.561C159.142 203.777 162.169 209.325 165.868 214.89C183.257 241.047 212.235 260.1 240.802 264.16C252.972 265.889 277.726 264.765 288.51 261.993Z" 
@@ -40,7 +39,9 @@
 
                 <p>Remember me</p>
             </div>
+
             <button :style="{backgroundColor: color}" >Log In</button>
+            <p>Don't have an account? <router-link to="/authorization/register">Register now.</router-link></p>
         </div>
     </div>
 </template>
@@ -58,86 +59,3 @@ export default{
     }
 }
 </script>
-
-<style scoped>
-.rememberBox p{
-    font-size: 16px;
-    color: #eee;
-}
-.checkbox{
-    width: 18px;
-    height: 18px;
-}
-.rememberBox{
-    cursor: pointer;
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    padding-left: 10px;
-}
-.eye{
-    width: 25px;
-    height: 25px;
-    position: absolute;
-    right: 15px;
-    top: 14px;
-    cursor: pointer;
-    opacity: 0.5;
-}
-button{
-    width: 100%;
-    height: 46px;
-    border-radius: 30px;
-    color: white;
-    font-size: 18px;
-}
-.inputBox{
-    position: relative;
-}
-.inputBox input{
-    color: white !important;
-    font-size: 16px;
-    background-color: #ffffff30;
-    border-radius: 30px;
-    height: 10px;
-    padding: 23px;
-    width: calc(100% - 46px);
-}
-h2{
-    text-align: center;
-    color: #eee;
-}
-#main{
-    position: relative;
-}
-#blureBox{
-    animation: showBox 500ms;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: 2;
-    border-radius: 30px;
-    filter: blur(10px);
-}
-@keyframes showBox {
-    0%{opacity: 0;}
-    100%{opacity: 1;}
-}
-#box{
-    animation: showBox 1500ms;
-    width: 400px;
-    padding: 30px;
-    display: grid;
-    gap: 20px;
-    position: relative;
-    z-index: 3;
-}
-
-@media screen and (max-width: 470px) {
-    #box{
-        width: calc(100vw - 60px);
-    }
-}
-</style>

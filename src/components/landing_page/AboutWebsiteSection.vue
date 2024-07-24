@@ -14,7 +14,7 @@
                     :fill="color"/>
                 </g>
                 <defs>
-                    <filter id="filter0_d_88_131" x="0" y="0" width="374.895" height="382.315" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <filter id="filter0_d_88_131" x="0" y="0"  filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
                         <feFlood flood-opacity="0" result="BackgroundImageFix"/>
                         <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
                         <feOffset dy="4"/>
@@ -52,7 +52,7 @@ export default{
 }
 #pictureBox img{
     position: relative;
-    width: 220px;
+    width: 60%;
     z-index: 1;
 }
 #pictureBox svg, #pictureBox svg path{
@@ -63,6 +63,7 @@ export default{
     z-index: 0;
     top: 50%;
     left: 50%;
+    width: 100%;
     transform: translate(-50%, -50%);
 }
 h2{
@@ -92,6 +93,12 @@ section{
     }
     #pictureBox{
         margin: auto;
+    }
+}
+@media screen and (max-width: 440px){
+    #pictureBox{
+        width: 100%;
+        height: unset;
     }
 }
 </style>

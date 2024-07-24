@@ -29,13 +29,13 @@
 </template>
 
 <script>
-import HeaderBar from '@/components/landing_page/HeaderBar.vue';
+import HeaderBar from '@/components/layout/HeaderBar.vue';
 import WelcomeSection from '@/components/landing_page/WelcomeSection.vue';
 import AboutSection from '@/components/landing_page/AboutWebsiteSection.vue';
 import UserInformationSection from '@/components/landing_page/UserInformationSection.vue';
 import PricesSection from '@/components/landing_page/PricesSection.vue';
 import FeedbackSection from '@/components/landing_page/FeedbackSection.vue';
-import FooterSection from '@/components/landing_page/FooterSection.vue';
+import FooterSection from '@/components/layout/FooterSection.vue';
 export default{
     components:{
         HeaderBar,
