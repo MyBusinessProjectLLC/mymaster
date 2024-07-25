@@ -1,10 +1,11 @@
 <template>
     <div id="main">
         <form @submit.prevent="next" id="box">
-            <h2>Registration</h2>
             <p>The verification code has been sent to the specified email: {{ email }}</p>
-            <p @click="$emit('goBack', 1)" >Wrong email? <router-link>Change it</router-link></p>
-            <p>Didn't receive the code? <router-link>Resend</router-link></p>
+            <p @click="$emit('goBack', 1)" >Wrong email? 
+                <a style="cursor: pointer;" >Change it</a>
+            </p>
+            <p>Didn't receive the code? <a style="cursor: pointer;">Resend</a></p>
             <div class="inputBox">
                 <input :style="{backgroundColor: color + '20'}" type="text"
                 :class="{'smoothBottom': errors.verification}" 
@@ -20,7 +21,6 @@
             </div>
 
             <button :style="{backgroundColor: color}" type="submit" >Next</button>
-            <p>Have an account? <router-link to="/authorization/login">Log in.</router-link></p>
         </form>
     </div>
 </template>
@@ -46,7 +46,7 @@ export default{
             // Check errors
             if(!this.errors.verification 
             ){
-                this.$emit('next', 2);
+                this.$emit('next', 3);
                 this.$emit('setData', {
                     verificationCode: this.code
                 })

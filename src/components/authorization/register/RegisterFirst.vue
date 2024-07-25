@@ -1,12 +1,11 @@
 <template>
     <div id="main">
         <form @submit.prevent="next" id="box">
-            <h2>Registration</h2>
 
             <div class="inputBox">
                 <input :style="{backgroundColor: color + '20'}" type="text"
                 :class="{'smoothBottom': errors.firstName}" 
-                v-model="firstName" name="login" placeholder="Second name" >
+                v-model="firstName" name="login" placeholder="First name" >
                 <div class="errorBox" :style="{maxHeight: errors.firstName ? '100px' : '0px',
                     padding: errors.firstName ? '5px 20px' : '0px 20px',
                     borderTopLeftRadius: errors.firstName ? '0px' : '25px',
@@ -58,7 +57,6 @@
             </div>
 
             <button :style="{backgroundColor: color}" type="submit" >Next</button>
-            <p>Have an account? <router-link to="/authorization/login">Log in.</router-link></p>
         </form>
     </div>
 </template>
@@ -91,7 +89,7 @@ export default{
                 && !this.errors.secondName
                 && !this.errors.email
             ){
-                this.$emit('next', 1);
+                this.$emit('next', 2);
                 this.$emit('setData', {
                     firstName: this.firstName,
                     secondName: this.secondName,

@@ -5,8 +5,17 @@
             <img src="@/assets/authorization/standard.svg" class="userTypeImage" alt="Standard picture for all users">
             <img src="@/assets/authorization/worker.svg" class="userTypeImage" alt="Standard picture for all users">
         </div>
-        <LoginPopup v-if="$route.params.type === 'login'" :color="color" />
-        <RegisterPopup v-if="$route.params.type === 'register'" :color="color" />
+        <LoginPopup 
+          v-if="$route.params.type === 'login'" 
+          :color="color" 
+        />
+        
+        <RegisterPopup 
+          v-if="$route.params.type === 'register'" 
+          :color="color" 
+          @changeUserType="changeUserType" 
+        />
+        
     </section>
 </template>
 
@@ -21,9 +30,22 @@ export default {
     },
     data() {
         return {
+            userType: '',
             color: this.$store.state.colors[sessionStorage.getItem('userType')] || this.$store.state.colors.standard
         };
     },
+    methods:{
+      changeUserType(type){
+        this.color = this.$store.state.colors[type];
+        let pageNumber = 0;
+        if(type === 'worker'){
+          pageNumber = 2;
+        }else{
+          pageNumber = 1;
+        }
+        this.$refs.imageBox.scrollLeft = this.$refs.imageBox.clientWidth * pageNumber;
+      }
+    }
 }
 </script>
 

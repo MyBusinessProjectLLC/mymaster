@@ -1,15 +1,36 @@
 <template>
-    <div id="registrationMainBox" ref="registerMain" >
-        <RegisterFirst :color="color" @next="setPage" @setData="setNmaeAndEmail" />
-        <EmailVerification :color="color" :email="userData.email" @next="setPage" @back="setPage"  />
+    <div >
+        <h2>Registration</h2>
+        <div id="registrationMainBox" ref="registerMain" >
+            <UserType 
+                @changeUserType="changeUserType" 
+            />
+
+            <RegisterFirst 
+                :color="color" 
+                @next="setPage" 
+                @setData="setNmaeAndEmail" 
+            />
+
+            <EmailVerification 
+                :color="color" 
+                :email="userData.email" 
+                @next="setPage" 
+                @goBack="setPage"  
+            />
+        </div>
+        <p style="text-align: center;">Have an account? <router-link to="/authorization/login">Log in.</router-link></p>
     </div>
 </template>
 
 <script>
-import RegisterFirst from '@/components/authorization/register/RegisterFirst.vue'
+import UserType from '@/components/authorization/register/UserType.vue';
+import RegisterFirst from '@/components/authorization/register/RegisterFirst.vue';
 import EmailVerification from '@/components/authorization/register/EmailVerification.vue';
+
 export default{
     components:{
+        UserType,
         RegisterFirst,
         EmailVerification
     },
@@ -18,8 +39,9 @@ export default{
     },
     data(){
         return{
-            page: 0,
+            page: 2,
             showPassword: false,
+            userType: '',
             userData:{
                 firstName: '',
                 secondName: '',
@@ -28,7 +50,15 @@ export default{
             }
         }
     },
+    mounted(){
+        this.changePage();
+    },
     methods:{
+        changeUserType(type){
+            this.$emit('changeUserType', type);
+            this.setPage(1);
+            this.userType = type;
+        },
         changePage(){
             this.$refs.registerMain.scrollLeft = this.$refs.registerMain.clientWidth * this.page;
         },
