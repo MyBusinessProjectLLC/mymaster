@@ -18,6 +18,10 @@
                 @next="setPage" 
                 @goBack="setPage"  
             />
+
+            <PasswordMenu
+                :color="color"
+            />
         </div>
         <p style="text-align: center;">Have an account? <router-link to="/authorization/login">Log in.</router-link></p>
     </div>
@@ -27,19 +31,21 @@
 import UserType from '@/components/authorization/register/UserType.vue';
 import RegisterFirst from '@/components/authorization/register/RegisterFirst.vue';
 import EmailVerification from '@/components/authorization/register/EmailVerification.vue';
+import PasswordMenu from '@/components/authorization/register/PasswordMenu.vue';
 
 export default{
     components:{
         UserType,
         RegisterFirst,
-        EmailVerification
+        EmailVerification,
+        PasswordMenu
     },
     props:{
         color: String
     },
     data(){
         return{
-            page: 2,
+            page: 0,
             showPassword: false,
             userType: '',
             userData:{

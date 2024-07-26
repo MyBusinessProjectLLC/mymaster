@@ -41,7 +41,9 @@
             </div>
 
             <button :style="{backgroundColor: color}" >Log In</button>
-            <p>Don't have an account? <router-link to="/authorization/register">Register now.</router-link></p>
+            <p style="text-align: center;">Don't have an account? 
+                <router-link to="/authorization/register">Register now.</router-link>
+            </p>
         </div>
     </div>
 </template>
